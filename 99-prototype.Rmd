@@ -48,10 +48,16 @@ charts <- DatawRappr::dw_list_charts(api_key = "environment", published = TRUE)
 ```{r}
 charts <- c(
   "z9ijf", "UVyA7", "8h04B", "BO1V2", # tables
-  "k1ftC", "4b4W8","Z61P0","sJvtl" # barcharts
+  # barcharts
+  "k1ftC", #"4b4W8", # Ostbahnhof
+  "Z61P0","sJvtl" 
   )
 ```
 
 ```{r}
-result <- purrr::map(charts, dw_publish_chart)
+# charts <- c("4b4W8") # Ostbahnhof Playground
+```
+
+```{r}
+result <- purrr::walk(charts, dw_publish_chart, return_urls = FALSE)
 ```

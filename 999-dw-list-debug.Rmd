@@ -1,0 +1,14 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Bug: list charts doesn't work
+
+```{r}
+x <- list(
+  list(publicId = "wuTKT", folderId = NULL)
+)
+DatawRappr:::bind_rows(x)
+```
+
