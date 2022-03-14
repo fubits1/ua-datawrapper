@@ -32,10 +32,14 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
       # - name: install sys libs
       #   run: |
       #     apt-get update && apt-get install libcurl4-openssl-dev libssl-dev -qq
+      - name: Install magick libs
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get -y install libmagick++-dev
       # - name: "install Googlesheets package"
       #   run: |
       #       R -e 'install.packages("googlesheets4", lib = "/usr/local/lib/R/site-library")'
