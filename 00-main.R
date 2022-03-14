@@ -1,4 +1,4 @@
-## TODO: move into GH workflow
+## TODO: move into GH workflow step
 if (!require("DatawRappr")) {
   devtools::install_github("munichrocker/DatawRappr")
 }
