@@ -26,6 +26,7 @@ jobs:
     container:
       image: docker://rocker/tidyverse
     env:
+      GITHUB_PAT: ${{ secrets.RGITHUB_TOKEN }} # needed for the DW Package
       API_KEY: ${{ secrets.API_KEY }}
       CHART_IDS: ${{ secrets.CHART_IDS }}
     # Steps represent a sequence of tasks that will be executed as part of the job
