@@ -1,0 +1,45 @@
+name: Datawrapper re-publish
+
+# on:
+#   schedule:
+#     - cron: '30 9-17 * * *' # TBC: 9am to 5pm: run every hour at 30 past the hour
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+    paths:
+      - 'R/**.R'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'R/**.R'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  pipeline-run:
+    name: "Job: full pipeline run"
+    runs-on: ubuntu-latest
+    container:
+      image: docker://rocker/tidyverse
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+      CHART_IDS: ${{ secrets.CHART_IDS }}
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      # - name: install sys libs
+      #   run: |
+      #     apt-get update && apt-get install libcurl4-openssl-dev libssl-dev -qq
+      # - name: "install Googlesheets package"
+      #   run: |
+      #       R -e 'install.packages("googlesheets4", lib = "/usr/local/lib/R/site-library")'
+      - name: "Run R Pipeline"
+        run: |
+            source("00-main.R")
+        shell: Rscript {0}
+            # artifacts:
